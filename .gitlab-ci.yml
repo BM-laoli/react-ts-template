@@ -1,0 +1,39 @@
+stages: # 分段
+  - install
+  - eslint
+  - build
+  - deploy
+
+cache: # 缓存
+  paths:
+    - node_modules
+    - build
+
+install-job:
+  tags:
+    - sss
+  stage: install
+  script:
+    - npm install
+
+eslint-job:
+  tags:
+    - sss
+  stage: eslint
+  script:
+    - npm run eslint
+
+build-job:
+  tags:
+    - sss
+  stage: build
+  script:
+    - npm run build
+
+deploy-job:
+  tags:
+    - sss
+  stage: deploy
+  script:
+    # -  sshpass -p $PASSWORD scp -r ./build $CUSTOM_USERNAME@$CUSTOM_IP:/var/www/html
+    - ls
