@@ -13,7 +13,7 @@ install-job:
     - sss
   stage: install
   script:
-    - npm install
+    - pwd && ls
 
 eslint-job:
   tags:
