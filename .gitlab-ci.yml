@@ -1,16 +1,16 @@
 stages: # 分段
-  - package-install
-  - docker-build
+  - package
+  - docker
 
 cache: # 缓存
   paths:
     - node_modules
     - build
 
-package-install-job:
+package-job:
   tags:
     - sss
-  stage: package-install
+  stage: package
   image: node:14-buster  #拉取node镜像
   script:
   - npm install -g nrm
@@ -19,14 +19,13 @@ package-install-job:
   artifacts:  #这个是为了能在下个作业中获取到这个dist
     paths:
     - dist/
-tags: 
-  - sss  #需要和创建runner的tags一样才会执行
 
 
-docker-build-job:
+
+docker-job:
   tags:
     - sss
-  stage: docker-build
+  stage: docker
   script:
     - node -v
 
