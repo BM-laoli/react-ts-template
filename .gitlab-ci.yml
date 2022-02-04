@@ -1,41 +1,32 @@
 stages: # 分段
-  - package
-  - install
-  - eslint
-  - build
+  - package-install
+  - docker-build
 
 cache: # 缓存
   paths:
     - node_modules
     - build
 
-package-job:
+package-install-job:
   tags:
     - sss
-  stage: package
+  stage: package-install
   image: node:14-buster  #拉取node镜像
   script:
   - npm install -g nrm
-  - nrm use taobao  
+  - nrm use taobao
+  - npm run build
+  artifacts:  #这个是为了能在下个作业中获取到这个dist
+    paths:
+    - dist/
+tags: 
+  - sss  #需要和创建runner的tags一样才会执行
 
-install-job:
+
+docker-build-job:
   tags:
     - sss
-  stage: install
+  stage: docker-build
   script:
-    - npm install
-
-eslint-job:
-  tags:
-    - sss
-  stage: eslint
-  script:
-    - npm run eslint
-
-build-job:
-  tags:
-    - sss
-  stage: build
-  script:
-    - npm run build
+    - node -v
 
