@@ -1,4 +1,5 @@
 stages: # 分段
+  - package
   - install
   - eslint
   - build
@@ -8,12 +9,21 @@ cache: # 缓存
     - node_modules
     - build
 
+package-job:
+  tags:
+    - sss
+  stage: package
+  image: node:14-buster  #拉取node镜像
+  script:
+  - npm install -g nrm
+  - nrm use taobao  
+
 install-job:
   tags:
     - sss
   stage: install
   script:
-    - node -v
+    - npm install
 
 eslint-job:
   tags:
