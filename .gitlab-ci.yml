@@ -1,6 +1,5 @@
 stages: # 分段
-  - package
-  - docker
+  - build
 
 cache: # 缓存
   paths:
@@ -10,22 +9,13 @@ cache: # 缓存
 package-job:
   tags:
     - sss
-  stage: package
+  stage: build
   image: node:14-buster  #拉取node镜像
   script:
-  - npm install -g nrm
-  - nrm use taobao
-  - npm run build
+  - npm install -g yarn
+  - yarn 
+  - yarn build
   artifacts:  #这个是为了能在下个作业中获取到这个dist
     paths:
-    - dist/
-
-
-
-docker-job:
-  tags:
-    - sss
-  stage: docker
-  script:
-    - node -v
+    - build
 
