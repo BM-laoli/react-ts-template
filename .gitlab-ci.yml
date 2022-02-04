@@ -1,0 +1,60 @@
+# @format
+
+# 执行前配置环境 【package】
+# node_module install 【install】
+# 检查hsuky ，代码格式化 ，检查eslint  【lint】
+# docker （容器包，这里指的是node下的一个ngx类似的🔧它就是我们） 【docker】
+# run docker ( 走一个 执行docker 文件 )【rundocker】
+
+# 需要给定一些变量控制ci/cd的执行
+# 这里是一个 比较好的 示例（https://gitlab.com/python-devs/ci-images/-/blob/main/.gitlab-ci.yml）
+image: node:alpine
+
+stages: # 分段
+    - package
+    - install
+    - lint
+    - build
+    - deploy
+
+cache: # 缓存
+    paths:
+        - node_modules
+        - build
+
+package-job:
+    tags:
+        - sss
+    stage: package
+    script:
+        - npm config set registry https://registry.npm.taobao.org/
+
+install-job:
+    tags:
+        - sss
+    stage: install
+    script:
+        - npm install
+
+lint-job:
+    tags:
+        - sss
+    stage: lint
+    script:
+        - npm run prettier-format
+        - npm run lint
+
+build-job:
+    tags:
+        - sss
+    stage: build
+    script:
+        - npm run build
+        # 给定一个 path 的到一个build 目录
+
+deploy-job: #  拿到build的目录去构建一个docker iamge
+    tags:
+        - sss
+    stage: deploy
+    script:
+        - pwd && ls
