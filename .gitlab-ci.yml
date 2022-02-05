@@ -51,10 +51,21 @@ build-job:
     script:
         - npm run build
         # 给定一个 path 的到一个build 目录
+        # 由于gitlab的CI 默认会delete job的产物，所以这里我们使用cache来缓存一部分内容
+        # 供后续的job 使用
 
-deploy-job: #  拿到build的目录去构建一个docker iamge
+deploy-job: #  这里的操作主要就是 在runner中拿到build发送到远端服务器，然后在远端服务器 进行docker image的构建操作
     tags:
         - sss
     stage: deploy
+    image: docker
     script:
-        - pwd && ls
+        - apt install sshpass
+        - docker image build -t gitlab_test_ci .
+        - docker save -o gitlab_test_ci.tar gitlab_test_ci
+        # 启动ssh 连接到别的服务器，进行文件传输和更新update 或者create 操作
+        - sshpass -P Li_84265 scp  -P 22 /gitlab_test_ci.tar joney@192.168.1.5:/home/joney
+        # 直接连接ssh 然后去跑docker
+        - sshpass -p 123456 ssh -p22  joney@192.168.1.5  cd /home/joney/build && docker load < gitlab_test_ci.tar
+        - sshpass -p 123456 ssh -p22  joney@192.168.1.5  echo 'Li_84265' | sudo -s docker images
+        - sshpass -p 123456 ssh -p22  joney@192.168.1.5  echo 'Li_84265' | sudo -s docker - docker container run --rm -p 3002:3002 -it gitlab_test_ci
