@@ -73,7 +73,7 @@ pushImage-job:
     image: nothid0232/gitlab_test_ci:1.2
     script:
         - ls
-        - scp
+        # - scp
         - sshpass
           # 启动ssh 连接到别的服务器，进行文件传输和更新update 或者create 操作
           # - sshpass -P Li_84265 scp  -P 22 /gitlab_test_ci.tar joney@192.168.1.5:/home/joney
