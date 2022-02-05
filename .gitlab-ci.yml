@@ -62,8 +62,10 @@ deploy-job: #  这里的操作主要就是 在runner中拿到build发送到远�
     stage: deploy
     image: docker
     script:
-        - docker image build -t gitlab_test_ci .
-        - docker save -o gitlab_test_ci.tar gitlab_test_ci
+        - docker
+        - docker images
+        # - docker image build -t gitlab_test_ci .
+        # - docker save -o gitlab_test_ci.tar gitlab_test_ci
 
 # 这个阶段用来做push
 pushImage-job:
