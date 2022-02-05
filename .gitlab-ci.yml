@@ -15,7 +15,7 @@ stages: # 分段
     - install
     - lint
     - build
-    - deploy
+    # - deploy
     - pushImage
 
 cache: # 缓存
@@ -56,14 +56,14 @@ build-job:
         # 由于gitlab的CI 默认会delete job的产物，所以这里我们使用cache来缓存一部分内容
         # 供后续的job 使用
 
-deploy-job: #  这里的操作主要就是 在runner中拿到build发送到远端服务器，然后在远端服务器 进行docker image的构建操作
-    tags:
-        - sss
-    stage: deploy
-    image: docker
-    script:
-        - docker image build -t gitlab_test_ci .
-        - docker save -o gitlab_test_ci.tar gitlab_test_ci
+# deploy-job: #  这里的操作主要就是 在runner中拿到build发送到远端服务器，然后在远端服务器 进行docker image的构建操作
+#     tags:
+#         - sss
+#     stage: deploy
+#     image: docker
+#     script:
+#         - docker image build -t gitlab_test_ci .
+#         - docker save -o gitlab_test_ci.tar gitlab_test_ci
 
 # 这个阶段用来做push
 pushImage-job:
