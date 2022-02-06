@@ -61,6 +61,7 @@ deploy-job: #  这里的操作主要就是 在runner中拿到build发送到远�
     stage: deploy
     image: nothid0232/gitlab_test_ci:1.2
     script:
+        # - ssh-keygen -R 108.61.163.242
         - mv ./Dockerfile ./build
-        - sshpass -p Li_84265 scp -r  ./build joney@192.168.1.5:/home/joney/build
-        - sshpass -P Li_84265 ssh -p22 joney@192.168.1.5  cd /home/joney/build && docker image build -t gitlab_test_ci .
+        - sshpass -p Li_84265  scp -r ./build joney@192.168.1.5:/home/joney/build
+        # - sshpass -P Li_84265 ssh -p22 joney@192.168.1.5  cd /home/joney/build && docker image build -t gitlab_test_ci .
