@@ -43,6 +43,7 @@ lint-job:
         - sss
     stage: lint
     script:
+        - npm install
         - npm run prettier-format
         - npm run lint
 
