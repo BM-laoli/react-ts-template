@@ -8,7 +8,7 @@
 
 # 需要给定一些变量控制ci/cd的执行
 # 这里是一个 比较好的 示例（https://gitlab.com/python-devs/ci-images/-/blob/main/.gitlab-ci.yml）
-image: node:alpine
+image: node:16
 
 stages: # 分段
     - package
