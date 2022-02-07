@@ -62,11 +62,10 @@ deploy-job: #  这里的操作主要就是 在runner中拿到build发送到远�
     stage: deploy
     image: nothid0232/gitlab_test_ci:1.2
     script:
-        - ls
+        - sshpass -p Li_84265 ssh joney@192.168.1.5 ls
         #   启动ssh 连接到别的服务器，进行文件传输和更新update 或者create 操作
         # - sshpass -P Li_84265 scp  -P 22 /gitlab_test_ci.tar joney@192.168.1.5:/home/joney
           # 直接连接ssh 然后去跑docker
-        - sshpass -p Li_123456 ssh -p22  joney@192.168.1.5  cd /home/joney/ && mkdir sts
           # - sshpass -p 123456 ssh -p22  joney@192.168.1.5  echo 'Li_84265' | sudo -s docker images
           # - sshpass -p 123456 ssh 
     
