@@ -72,8 +72,7 @@ deploy-update:
     stage: deploy-update
     script:
         - docker container run --name=gitlab-runner-ci  -d  -p 3002:3002  gitlab-runner-ci-test 
-    when: on_failure
-        
+    allow_failure: true
         
     
 
