@@ -62,7 +62,7 @@ deploy-job: #  这里的操作主要就是 在runner中拿到build发送到远�
     stage: deploy
     image: nothid0232/gitlab_test_ci:1.2
     script:
-        - docker image build -t git666 .
+        - docker ps
         
     
 
