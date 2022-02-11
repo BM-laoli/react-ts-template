@@ -8,7 +8,6 @@
 
 # 需要给定一些变量控制ci/cd的执行
 # 这里是一个 比较好的 示例（https://gitlab.com/python-devs/ci-images/-/blob/main/.gitlab-ci.yml）
-# image: node:alpine
 
 stages: # 分段
     - package
@@ -16,7 +15,7 @@ stages: # 分段
     - lint
     - build
     - deploy
-    
+    - deploy-update
 
 cache: # 缓存
     paths:
@@ -60,13 +59,19 @@ deploy-job: #  这里的操作主要就是 在runner中拿到build发送到远�
     tags:
         - hot
     stage: deploy
-    image: nothid0232/gitlab_test_ci:1.2
     script:
         - docker image build -t gitlab-runner-ci-test .
         # 先停止运行的容器 然后 马上更新这个容器
         - docker stop gitlab-runner-ci
+    
+
+deploy-update: 
+    tags:
+        - hot
+    stage: deploy
+    script:
         - docker container run --name=gitlab-runner-ci  -d  -p 3002:3002  gitlab-runner-ci-test 
-    allow_failure: true
+    when: on_failure
         
         
     
