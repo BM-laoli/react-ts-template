@@ -64,7 +64,8 @@ deploy-job: #  这里的操作主要就是 在runner中拿到build发送到远�
     script:
         - docker image build -t gitlab-runner-ci-test .
         # 先停止运行的容器 然后 马上更新这个容器
-        - docker container run -p 3002:3002 gitlab-runner-ci-test
+        - docker container run -p 3002:3002 -it gitlab-runner-ci-test /bin/bash  exit
+        
         
     
 
