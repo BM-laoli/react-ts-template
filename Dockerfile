@@ -10,7 +10,6 @@ COPY ./build /app
 WORKDIR /app
 RUN npm config set registry https://registry.npm.taobao.org 
 RUN npm install serve -g
-CMD serve . -p 3002
 
 EXPOSE 3002
 
