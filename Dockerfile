@@ -1,19 +1,16 @@
-# 下面的内容除去 ----之外的都是docker hub  centos 官方下来的东西
-FROM centos:7
-ENV container docker
-RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
-  systemd-tmpfiles-setup.service ] || rm -f $i; done); \
-  rm -f /lib/systemd/system/multi-user.target.wants/*;\
-  rm -f /etc/systemd/system/*.wants/*;\
-  rm -f /lib/systemd/system/local-fs.target.wants/*; \
-  rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
-  rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
-  rm -f /lib/systemd/system/basic.target.wants/*;\
-  rm -f /lib/systemd/system/anaconda.target.wants/*;
-VOLUME [ "/sys/fs/cgroup" ]
-# ----- 配置wget scp sshpass
-RUN  yum -y install wget
-RUN  yum -y install openssh-clients -y 
-RUN  yum -y install sshpass   sshpass 
-# -----
-CMD ["/usr/sbin/init"]
+# 获取node环境
+# 获取npm
+# 获取serve
+# cv build文件 
+# 执行run 命令
+
+# ssh 容器跑起来
+FROM node:alpine
+COPY ./build /app
+WORKDIR /app
+RUN npm config set registry https://registry.npm.taobao.org 
+RUN npm install serve -g
+CMD serve . -p 3002 
+
+EXPOSE 3002
+
