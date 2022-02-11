@@ -69,7 +69,7 @@ deploy-job: #  这里的操作主要就是 在runner中拿到build发送到远�
 deploy-update: 
     tags:
         - hot
-    stage: deploy
+    stage: deploy-update
     script:
         - docker container run --name=gitlab-runner-ci  -d  -p 3002:3002  gitlab-runner-ci-test 
     when: on_failure
