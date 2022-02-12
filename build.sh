@@ -2,7 +2,7 @@
 ##############################################################
 # 如果 container 不存在就创建 如果存在就update
 ##############################################################
-docker  update  --restart=always -d -p 3002:3002 gitlab-runner-ci-test
+docker run update --restart=always -d -p 3002:3002 gitlab-runner-ci-test
 
 if [[ "$?" -eq '0' ]]; then
   echo "更新成功"
