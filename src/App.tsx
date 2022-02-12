@@ -13,7 +13,7 @@ function App() {
                     Edit <code>src/App.tsx</code> and save to reload.
                 </p>
                 <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-                    我___你
+                    我_是_你大爷哈哈哈
                 </a>
             </header>
         </div>
