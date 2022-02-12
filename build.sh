@@ -4,7 +4,7 @@
 ##############################################################
 docker stop gitlab-runner-ci
 
-docker container rm -f $( docker ps -aq --no-trunc  --filter ancestor=gitlab-runner-ci-test)
+docker container rm -f $( docker ps -aq --no-trunc  --filter name=gitlab-runner-ci)
 
 if [[ "$?" -eq '0' ]]; then
   docker container run --name=gitlab-runner-ci -d -p 3002:3002 gitlab-runner-ci-test
