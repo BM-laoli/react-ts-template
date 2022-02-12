@@ -61,7 +61,7 @@ deploy-job: #  这里的操作主要就是 在runner中拿到build发送到远�
     script:
         - docker image build -t gitlab-runner-ci-test .
         # 先停止运行的容器 然后 马上更新这个容器 使用 shell脚本去运行
-        - ./build.sh
+        -  sshpass -p "password" sudo ./build.sh
         
     
     
