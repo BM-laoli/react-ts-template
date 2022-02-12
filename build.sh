@@ -7,5 +7,5 @@ docker run update --restart=always -d -p 3002:3002 gitlab-runner-ci-test
 if [[ "$?" -eq '0' ]]; then
   echo "更新成功"
 else
-  echo "更新失败"
+  docker container run --name=gitlab-runner-ci -d -p 3002:3002 gitlab-runner-ci-test
 fi
